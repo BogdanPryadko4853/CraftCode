@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CraftCode | Мастерская программирования</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #11111a;
+            --bg-card-hover: #1a1a26;
+            --primary: #8a2be2;
+            --primary-light: #9d4edd;
+            --secondary: #00bfff;
+            --accent: #ff2e8e;
+            --text: #f0f0f5;
+            --text-light: #b0b0c0;
+            --border: #2a2a3a;
+            --success: #00d68f;
+            --github: #6e5494;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-hover: linear-gradient(135deg, var(--primary-light), #00ccff);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(138, 43, 226, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 85% 30%, rgba(0, 191, 255, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(255, 46, 142, 0.02) 0%, transparent 20%);
+            z-index: -2;
+        }
+
+        /* Навигация */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(10, 10, 15, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        /* Герой секция */
+        .hero {
+            padding: 12rem 5% 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+
+        /* Технологии карусель */
+        .tech-carousel {
+            background: rgba(17, 17, 26, 0.7);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 4rem auto;
+            max-width: 1000px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--border);
+        }
+
+        .tech-carousel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gradient);
+        }
+
+        .tech-track {
+            display: flex;
+            animation: scrollTech 40s linear infinite;
+            gap: 3rem;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            white-space: nowrap;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        .tech-icon {
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .tech-item.java .tech-icon { color: #f89820; }
+        .tech-item.python .tech-icon { color: #3776ab; }
+        .tech-item.spring .tech-icon { color: #6db33f; }
+        .tech-item.sql .tech-icon { color: #00bfff; }
+        .tech-item.js .tech-icon { color: #f0db4f; }
+        .tech-item.html .tech-icon { color: #e34c26; }
+        .tech-item.css .tech-icon { color: #2965f1; }
+
+        @keyframes scrollTech {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Карточки курсов */
+        .courses-section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3.5rem;
+            color: var(--text);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (min-width: 1200px) {
+            .courses-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .course-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .course-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            background: var(--bg-card-hover);
+            box-shadow: 0 20px 40px rgba(138, 43, 226, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-category {
+            background: rgba(138, 43, 226, 0.15);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--secondary);
+            opacity: 0.8;
+        }
+
+        .course-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+            line-height: 1.3;
+        }
+
+        .course-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .price-tag {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--success);
+            margin: 1rem 0 0.5rem;
+        }
+
+        .price-note {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Кнопки */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 1.8rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 4px 20px rgba(138, 43, 226, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--gradient-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(138, 43, 226, 0.4);
+        }
+
+        .btn-telegram {
+            background: #0088cc;
+            color: white;
+            padding: 0.9rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn-telegram:hover {
+            background: #1e96d1;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 136, 204, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .btn-github {
+            background: var(--github);
+            color: white;
+            padding: 0.9rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-github:hover {
+            background: #7d5ba6;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(110, 84, 148, 0.3);
+        }
+
+        /* Футер */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 4rem 5% 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .footer-section p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .teacher-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .teacher-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 5%;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 8rem 5% 4rem;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tech-carousel {
+                padding: 1rem;
+            }
+            
+            .tech-item {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Мобильное меню */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="logo">CraftCode</div>
+        <div class="nav-links">
+            <a href="#home" class="active">Главная</a>
+            <a href="#courses">Курсы</a>
+            <a href="#about">Обо мне</a>
+        </div>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Герой секция -->
+    <section id="home" class="hero">
+        <h1>От идеи к работающему коду</h1>
+        <p>Индивидуальные занятия по программированию. Помогаю освоить Python, Java, веб-разработку и алгоритмы — для школьников, студентов и начинающих разработчиков.</p>
+        
+        <!-- Карусель технологий -->
+        <div class="tech-carousel">
+            <div class="tech-track">
+                <div class="tech-item java">
+                    <i class="fab fa-java tech-icon"></i>
+                    <span>Java</span>
+                </div>
+                <div class="tech-item python">
+                    <i class="fab fa-python tech-icon"></i>
+                    <span>Python</span>
+                </div>
+                <div class="tech-item spring">
+                    <i class="fas fa-leaf tech-icon"></i>
+                    <span>Spring Framework</span>
+                </div>
+                <div class="tech-item sql">
+                    <i class="fas fa-database tech-icon"></i>
+                    <span>SQL & NoSQL</span>
+                </div>
+                <div class="tech-item js">
+                    <i class="fab fa-js-square tech-icon"></i>
+                    <span>JavaScript</span>
+                </div>
+                <div class="tech-item html">
+                    <i class="fab fa-html5 tech-icon"></i>
+                    <span>HTML5</span>
+                </div>
+                <div class="tech-item css">
+                    <i class="fab fa-css3-alt tech-icon"></i>
+                    <span>CSS3</span>
+                </div>
+                <!-- Дублируем для бесшовной анимации -->
+                <div class="tech-item java">
+                    <i class="fab fa-java tech-icon"></i>
+                    <span>Java</span>
+                </div>
+                <div class="tech-item python">
+                    <i class="fab fa-python tech-icon"></i>
+                    <span>Python</span>
+                </div>
+                <div class="tech-item spring">
+                    <i class="fas fa-leaf tech-icon"></i>
+                    <span>Spring Framework</span>
+                </div>
+                <div class="tech-item sql">
+                    <i class="fas fa-database tech-icon"></i>
+                    <span>SQL & NoSQL</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Карточки курсов -->
+    <section id="courses" class="courses-section">
+        <h2 class="section-title">Программы обучения</h2>
+        <div class="courses-grid">
+            <!-- Карточка 1 -->
+            <div class="course-card">
+                <div class="card-header">
+                    <span class="card-category">Стартовый</span>
+                    <i class="fas fa-code card-icon"></i>
+                </div>
+                <h3>Основы программирования</h3>
+                <p>Python или Java с нуля. Создаем первые работающие приложения, понимаем логику кода. Персональный подход к каждому ученику.</p>
+                <div class="price-tag">Пробный урок (1 час): 300 ₽</div>
+                <div class="price-note">Далее: 600 ₽/час, 400 ₽/45 мин, 900 ₽/1.5 часа</div>
+                <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="btn-telegram">
+                    <i class="fab fa-telegram"></i>
+                    Записаться на курс
+                </a>
+            </div>
+
+            <!-- Карточка 2 -->
+            <div class="course-card">
+                <div class="card-header">
+                    <span class="card-category">Алгоритмы</span>
+                    <i class="fas fa-brain card-icon"></i>
+                </div>
+                <h3>Решение олимпиадных задач</h3>
+                <p>Развиваем алгоритмическое мышление. Подготовка к олимпиадам, ЕГЭ или техническим собеседованиям. Python, Java, C++.</p>
+                <div class="price-tag">Пробный урок (1 час): 300 ₽</div>
+                <div class="price-note">Гибкая система тарифов, пакеты занятий</div>
+                <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="btn-telegram">
+                    <i class="fab fa-telegram"></i>
+                    Записаться на курс
+                </a>
+            </div>
+
+            <!-- Карточка 3 -->
+            <div class="course-card">
+                <div class="card-header">
+                    <span class="card-category">Экзамены</span>
+                    <i class="fas fa-graduation-cap card-icon"></i>
+                </div>
+                <h3>ЕГЭ по информатике</h3>
+                <p>Полный разбор всех типов задач, стратегии решения, практика на реальных примерах. Нацеленность на максимальный балл.</p>
+                <div class="price-tag">Пробный урок (1 час): 300 ₽</div>
+                <div class="price-note">Рекомендуется блок из 10-15 занятий</div>
+                <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="btn-telegram">
+                    <i class="fab fa-telegram"></i>
+                    Записаться на курс
+                </a>
+            </div>
+
+            <!-- Карточка 4 -->
+            <div class="course-card">
+                <div class="card-header">
+                    <span class="card-category">Профессия</span>
+                    <i class="fas fa-server card-icon"></i>
+                </div>
+                <h3>Backend-разработка на Java</h3>
+                <p>Spring Framework, базы данных, микросервисы. Практика: от первого контроллера до развёрнутого приложения.</p>
+                <div class="price-tag">Пробный урок (1 час): 300 ₽</div>
+                <div class="price-note">Спецтариф для углублённого изучения</div>
+                <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="btn-telegram">
+                    <i class="fab fa-telegram"></i>
+                    Записаться на курс
+                </a>
+            </div>
+
+            <!-- Карточка 5 -->
+            <div class="course-card">
+                <div class="card-header">
+                    <span class="card-category">Студентам</span>
+                    <i class="fas fa-university card-icon"></i>
+                </div>
+                <h3>Помощь с учебными проектами</h3>
+                <p>Лабораторные, курсовые, дипломы. Объяснение сложных тем (ООП, БД, алгоритмы). Практическая помощь в написании кода.</p>
+                <div class="price-tag">Пробный урок (1 час): 300 ₽</div>
+                <div class="price-note">Цена за помощь в проекте — индивидуально</div>
+                <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="btn-telegram">
+                    <i class="fab fa-telegram"></i>
+                    Записаться на курс
+                </a>
+            </div>
+
+            <!-- Карточка 6 -->
+            <div class="course-card">
+                <div class="card-header">
+                    <span class="card-category">Карьера</span>
+                    <i class="fas fa-briefcase card-icon"></i>
+                </div>
+                <h3>Собеседование разработчика</h3>
+                <p>Разбор вопросов, алгоритмических задач, систем design. Подготовка резюме и портфолио. Имитация реальных собеседований.</p>
+                <div class="price-tag">Консультация (1.5 часа): 900 ₽</div>
+                <div class="price-note">Пакет из нескольких тренировок</div>
+                <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="btn-telegram">
+                    <i class="fab fa-telegram"></i>
+                    Записаться на курс
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer id="about">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>О преподавателе</h3>
+                <div class="teacher-info">
+                    <img src="main.jpg" alt="Богдан Прядко" class="teacher-photo">
+                    <div>
+                        <h4>Богдан Прядко</h4>
+                        <p>Middle Backend-разработчик, 20 лет</p>
+                    </div>
+                </div>
+                <p>Занимаюсь разработкой с 17 лет, программированием увлекаюсь со школы. Реализовал проекты от Telegram-ботов до микросервисных решений.</p>
+                <p>Преподаю с фокусом на практику и реальные задачи. Гибкий формат — выбирайте удобную длительность урока, комбинируйте темы под свою цель.</p>
+                
+                <div class="social-links">
+                    <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" title="Telegram">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://vk.com/YOUR_VK_USERNAME" target="_blank" title="ВКонтакте">
+                        <i class="fab fa-vk"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Связаться</h3>
+                <p>Готов ответить на ваши вопросы и обсудить детали обучения. Пишите в Telegram — это самый быстрый способ!</p>
+                
+                <div class="contact-buttons">
+                    <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="btn-telegram">
+                        <i class="fab fa-telegram"></i>
+                        Написать в Telegram
+                    </a>
+                    
+                    <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" class="btn-github">
+                        <i class="fab fa-github"></i>
+                        Мой GitHub
+                    </a>
+                    
+                    <a href="#courses" class="btn btn-outline">
+                        <i class="fas fa-book"></i>
+                        Выбрать курс
+                    </a>
+                </div>
+                
+                <div style="margin-top: 2rem;">
+                    <p><i class="fas fa-envelope"></i> your.email@example.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Онлайн-обучение</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2026 CraftCode. Мастерская программирования. Все права защищены.
+        </div>
+    </footer>
+
+    <script>
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    const headerOffset = 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Активация пункта меню при скролле
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if(pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Мобильное меню
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            if(navLinks.style.display === 'flex') {
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.width = '100%';
+                navLinks.style.backgroundColor = 'rgba(10, 10, 15, 0.98)';
+                navLinks.style.padding = '2rem';
+                navLinks.style.gap = '1.5rem';
+                navLinks.style.borderTop = '1px solid var(--border)';
+            }
+        });
+
+        // Адаптация карусели технологий
+        function adjustTechCarousel() {
+            const techTrack = document.querySelector('.tech-track');
+            const techItems = document.querySelectorAll('.tech-item');
+            const containerWidth = document.querySelector('.tech-carousel').offsetWidth;
+            
+            let totalWidth = 0;
+            techItems.forEach(item => {
+                totalWidth += item.offsetWidth + 48;
+            });
+            
+            techTrack.style.width = `${totalWidth}px`;
+        }
+        
+        window.addEventListener('load', adjustTechCarousel);
+        window.addEventListener('resize', adjustTechCarousel);
+    </script>
+</body>
+</html>
