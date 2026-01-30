@@ -22,6 +22,7 @@
             --border: #2a2a3a;
             --success: #00d68f;
             --github: #6e5494;
+            --telegram: #0088cc;
             --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
             --gradient-hover: linear-gradient(135deg, var(--primary-light), #00ccff);
         }
@@ -350,7 +351,7 @@
         }
 
         .btn-telegram {
-            background: #0088cc;
+            background: var(--telegram);
             color: white;
             padding: 0.9rem 1.5rem;
             border-radius: 12px;
@@ -369,6 +370,28 @@
             background: #1e96d1;
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(0, 136, 204, 0.3);
+        }
+
+        .btn-group {
+            background: linear-gradient(135deg, #9d4edd, #7b2cbf);
+            color: white;
+            padding: 0.9rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .btn-group:hover {
+            background: linear-gradient(135deg, #7b2cbf, #5a189a);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(157, 78, 221, 0.3);
         }
 
         .btn-outline {
@@ -633,7 +656,7 @@
                 <p>Python или Java с нуля. Создаем первые работающие приложения, понимаем логику кода. Персональный подход к каждому ученику.</p>
                 <div class="price-tag">Пробный урок (1 час): 300 ₽</div>
                 <div class="price-note">Далее: 600 ₽/час, 400 ₽/45 мин, 900 ₽/1.5 часа</div>
-                <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="btn-telegram">
+                <a href="https://t.me/BodyaPryadko" target="_blank" class="btn-telegram">
                     <i class="fab fa-telegram"></i>
                     Записаться на курс
                 </a>
@@ -649,7 +672,7 @@
                 <p>Развиваем алгоритмическое мышление. Подготовка к олимпиадам, ЕГЭ или техническим собеседованиям. Python, Java, C++.</p>
                 <div class="price-tag">Пробный урок (1 час): 300 ₽</div>
                 <div class="price-note">Гибкая система тарифов, пакеты занятий</div>
-                <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="btn-telegram">
+                <a href="https://t.me/BodyaPryadko" target="_blank" class="btn-telegram">
                     <i class="fab fa-telegram"></i>
                     Записаться на курс
                 </a>
@@ -665,7 +688,7 @@
                 <p>Полный разбор всех типов задач, стратегии решения, практика на реальных примерах. Нацеленность на максимальный балл.</p>
                 <div class="price-tag">Пробный урок (1 час): 300 ₽</div>
                 <div class="price-note">Рекомендуется блок из 10-15 занятий</div>
-                <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="btn-telegram">
+                <a href="https://t.me/BodyaPryadko" target="_blank" class="btn-telegram">
                     <i class="fab fa-telegram"></i>
                     Записаться на курс
                 </a>
@@ -681,7 +704,7 @@
                 <p>Spring Framework, базы данных, микросервисы. Практика: от первого контроллера до развёрнутого приложения.</p>
                 <div class="price-tag">Пробный урок (1 час): 300 ₽</div>
                 <div class="price-note">Спецтариф для углублённого изучения</div>
-                <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="btn-telegram">
+                <a href="https://t.me/BodyaPryadko" target="_blank" class="btn-telegram">
                     <i class="fab fa-telegram"></i>
                     Записаться на курс
                 </a>
@@ -697,7 +720,7 @@
                 <p>Лабораторные, курсовые, дипломы. Объяснение сложных тем (ООП, БД, алгоритмы). Практическая помощь в написании кода.</p>
                 <div class="price-tag">Пробный урок (1 час): 300 ₽</div>
                 <div class="price-note">Цена за помощь в проекте — индивидуально</div>
-                <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="btn-telegram">
+                <a href="https://t.me/BodyaPryadko" target="_blank" class="btn-telegram">
                     <i class="fab fa-telegram"></i>
                     Записаться на курс
                 </a>
@@ -713,7 +736,7 @@
                 <p>Разбор вопросов, алгоритмических задач, систем design. Подготовка резюме и портфолио. Имитация реальных собеседований.</p>
                 <div class="price-tag">Консультация (1.5 часа): 900 ₽</div>
                 <div class="price-note">Пакет из нескольких тренировок</div>
-                <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="btn-telegram">
+                <a href="https://t.me/BodyaPryadko" target="_blank" class="btn-telegram">
                     <i class="fab fa-telegram"></i>
                     Записаться на курс
                 </a>
@@ -737,13 +760,13 @@
                 <p>Преподаю с фокусом на практику и реальные задачи. Гибкий формат — выбирайте удобную длительность урока, комбинируйте темы под свою цель.</p>
                 
                 <div class="social-links">
-                    <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" title="Telegram">
+                    <a href="https://t.me/BodyaPryadko" target="_blank" title="Telegram">
                         <i class="fab fa-telegram"></i>
                     </a>
-                    <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" title="GitHub">
+                    <a href="https://github.com/BogdanPryadko4853" target="_blank" title="GitHub">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://vk.com/YOUR_VK_USERNAME" target="_blank" title="ВКонтакте">
+                    <a href="https://vk.com/bodya_pryadko" target="_blank" title="ВКонтакте">
                         <i class="fab fa-vk"></i>
                     </a>
                 </div>
@@ -754,12 +777,17 @@
                 <p>Готов ответить на ваши вопросы и обсудить детали обучения. Пишите в Telegram — это самый быстрый способ!</p>
                 
                 <div class="contact-buttons">
-                    <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="btn-telegram">
+                    <a href="https://t.me/BodyaPryadko" target="_blank" class="btn-telegram">
                         <i class="fab fa-telegram"></i>
                         Написать в Telegram
                     </a>
                     
-                    <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" class="btn-github">
+                    <a href="https://t.me/BodyaPryadko" target="_blank" class="btn-group">
+                        <i class="fab fa-telegram"></i>
+                        Подписаться на группу
+                    </a>
+                    
+                    <a href="https://github.com/BogdanPryadko4853" target="_blank" class="btn-github">
                         <i class="fab fa-github"></i>
                         Мой GitHub
                     </a>
@@ -771,7 +799,7 @@
                 </div>
                 
                 <div style="margin-top: 2rem;">
-                    <p><i class="fas fa-envelope"></i> your.email@example.com</p>
+                    <p><i class="fas fa-envelope"></i> bogdanpryadko1@gmail.com</p>
                     <p><i class="fas fa-map-marker-alt"></i> Онлайн-обучение</p>
                 </div>
             </div>
